@@ -46,7 +46,6 @@ subnet $subnet_sub netmask $subnet_mask {
   max-lease-time 7200;}
 EOF
 
-#gawk -i inplace '!/INTERFACESv4=""/' /etc/default/isc-dhcp-server
 gawk -i inplace '!/INTERFACESv4/' /etc/default/isc-dhcp-server
 echo -e "INTERFACESv4=\"$interface\"" >> /etc/default/isc-dhcp-server
 
