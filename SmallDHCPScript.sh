@@ -43,7 +43,7 @@ subnet $subnet_sub netmask $subnet_mask {
  option domain-name-servers $dns_server;
  option routers $default_gateway;
    default-lease-time 3000;
-  max-lease-time 7200;}
+   max-lease-time 7200;}
 EOF
 
 gawk -i inplace '!/INTERFACESv4/' /etc/default/isc-dhcp-server
