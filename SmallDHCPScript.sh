@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version: 01.00.00.00
+# Version: 01.01.00.00
 
 echo "Script was created for Ubuntu 22.04..."
 echo ""
@@ -26,8 +26,10 @@ read interface
 
 echo "Please provide the IP range for DHCP (e.g., 192.168.1.100 192.168.1.200) - Note - you have to set start and end range - as per example:"
 read ip_range
+
 echo "Please provide the subnet for DHCP (e.g., 192.168.1.0):"
 read subnet_sub
+
 echo "Please provide the subnet mask for DHCP (e.g., 255.255.255.0):"
 read subnet_mask
 
@@ -37,13 +39,16 @@ read default_gateway
 echo "Please provide the DNS server for DHCP:"
 read dns_server
 
+echo "Please provide the IP Lease time in seconds (e.g., 3000) - Note - 3000 to 7200 is generally accepted as ok:"
+read dns_lease
+
 cat > /etc/dhcp/dhcpd.conf << EOF
 subnet $subnet_sub netmask $subnet_mask {
   range $ip_range;
  option domain-name-servers $dns_server;
  option routers $default_gateway;
-   default-lease-time 3000;
-   max-lease-time 7200;}
+   default-lease-time $dns_lease;
+   max-lease-time $dns_lease;}
 EOF
 
 gawk -i inplace '!/INTERFACESv4/' /etc/default/isc-dhcp-server
@@ -60,3 +65,8 @@ echo ""
 
 echo "Testing DHCP configuration...  if it does not show ERRORS, then it should work fine!! Hold thumbs..."
 dhcpd -t -cf /etc/dhcp/dhcpd.conf
+
+## Version: 01.00.00.00
+## Release...
+## Version: 01.01.00.00
+## Added DNS Lease veriable. Keeping Default and Max the same...
