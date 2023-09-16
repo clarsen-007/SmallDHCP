@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version: 01.01.00.00
+# Version: 01.01.00.01
 
 echo "Script was created for Ubuntu 22.04..."
 echo ""
@@ -42,13 +42,16 @@ read dns_server
 echo "Please provide the IP Lease time in seconds (e.g., 3000) - Note - 3000 to 7200 is generally accepted as ok:"
 read dns_lease
 
+echo "Please provide the Max IP Lease time in seconds (e.g., 3000) - Note - must be the same or higher than the IP Lease time"
+read max_lease
+
 cat > /etc/dhcp/dhcpd.conf << EOF
 subnet $subnet_sub netmask $subnet_mask {
   range $ip_range;
  option domain-name-servers $dns_server;
  option routers $default_gateway;
    default-lease-time $dns_lease;
-   max-lease-time $dns_lease;}
+   max-lease-time $max_lease;}
 EOF
 
 gawk -i inplace '!/INTERFACESv4/' /etc/default/isc-dhcp-server
