@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version: 01.01.00.01
+# Version: 00.01.01.00
 
 echo "Script was created for Ubuntu 22.04..."
 echo ""
