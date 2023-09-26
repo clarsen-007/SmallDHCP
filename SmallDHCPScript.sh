@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version: 00.01.01.00
+# Version: 00.01.01.01
 
 echo "Script was created for Ubuntu 22.04..."
 echo ""
@@ -68,10 +68,3 @@ echo ""
 
 echo "Testing DHCP configuration...  if it does not show ERRORS, then it should work fine!! Hold thumbs..."
 dhcpd -t -cf /etc/dhcp/dhcpd.conf
-
-## Version: 01.00.00.00
-## Release...
-## Version: 01.01.00.00
-## Added DNS Lease veriable. Keeping Default and Max the same...
-## Version: 01.01.00.01
-## Small bug fix...
